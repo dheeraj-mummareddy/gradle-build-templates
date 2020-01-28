@@ -1,5 +1,6 @@
 def local_spring_profile = project.properties['localSpringProfile'] ?: "local"
 def spring_cloud_version = project.properties['springCloudVersion'] ?: "Greenwich.RELEASE"
+def gradle_templates_source = project.properties['gradleTemplatesSource'] ?: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/"
 
 apply plugin: 'java'
 apply plugin: 'groovy'
@@ -12,13 +13,13 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'io.freefair.lombok'
 apply plugin: 'org.sonarqube'
 
-apply from: '../../gradle-common/common-utils-tasks.gradle'
-apply from: '../../gradle-common/git-common-functions.gradle'
-apply from: '../../gradle-common/git-semantic-release.gradle'
-apply from: '../../gradle-common/app-monitoring-configuration.gradle'
-apply from: '../../gradle-common/java-code-quality.gradle'
-apply from: '../../gradle-common/integration-tests.gradle'
-apply from: '../../gradle-common/performance-tests.gradle'
+apply from: "${gradle_templates_source}/common-utils-tasks.gradle"
+apply from: "${gradle_templates_source}/git-common-functions.gradle"
+apply from: "${gradle_templates_source}/git-semantic-release.gradle"
+apply from: "${gradle_templates_source}/app-monitoring-configuration.gradle"
+apply from: "${gradle_templates_source}/java-code-quality.gradle"
+apply from: "${gradle_templates_source}/integration-tests.gradle"
+apply from: "${gradle_templates_source}/performance-tests.gradle"
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
