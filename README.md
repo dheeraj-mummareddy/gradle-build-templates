@@ -59,7 +59,7 @@ TDB
 | `integrationTestSourceRoot`           | gradle                | src/integration-test      |
 | `performanceTestSourceRoot`           | gradle                | src/perf-test             |
 | `sonarOrganization`                   | sonar                 |                           |
-| `sonarHostUrl`                        | sonar                 | https://sonarcloud.io-1   |
+| `sonarHostUrl`                        | sonar                 | https://sonarcloud.io   	|
 
 | Property Name                         | Dependency/Plugin     | Default                   |
 |---------------------------------------|-----------------------|---------------------------|
