@@ -3,7 +3,7 @@
 Provides quick bootstrap scripts for spring-boot, spring-modules/jar which includes common plugins/capabilities used across microservices.
 Versions can be managed by the services which imports the scripts. Additional configurations for the plugins can be applied by the DSL related to the plugins.
 
-## how to use the common scripts
+## How to use the common scripts
 
 Add the following snippet to `build.gradle` to include build script configuration - TBD (move to plugin management)
 ```
@@ -96,11 +96,6 @@ Provides quick bootstrap scripts for spring-boot which helps building, packaging
 * Supported plugins
 
 - spring boot
-
-### version properties with defaults
-
-`datadogAgentVersion`
-
 
 ### semantic versioning stretergy
 TBD
