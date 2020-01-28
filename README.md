@@ -1,9 +1,28 @@
 # Gradle Build Templates
 
 Provides quick bootstrap scripts for spring-boot, spring-modules/jar which includes common plugins/capabilities used across microservices.
-All the version are managed by the services which imports the scripts. 
+Versions can be managed by the services which imports the scripts. Additional configurations for the plugins can be applied by the DSL related to the plugins.
 
-* Supported common plugins
+## how to use the common scripts
+
+Add the following snippet to `build.gradle` to include build script configuration - TBD (move to plugin management)
+```
+buildscript { 
+	apply from: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/init-buildscript.gradle", to: buildscript
+}
+```
+
+### Spring boot
+Enable spring boot bootstrap configurations by applying configuration
+```
+apply from: 'https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
+```
+
+## Versioning
+
+TDB
+
+## Supported common plugins
 
 - java
 - groovy
@@ -19,7 +38,7 @@ All the version are managed by the services which imports the scripts.
 - spotbugs
 - lombok
 
-* Support highlevel common scripts/tasks
+## Support highlevel common scripts/tasks
 
 - code quality
 - docker
@@ -29,7 +48,34 @@ All the version are managed by the services which imports the scripts.
 - performance tests
 - semantic release
 
-* Required/Optional gradle properties - TDB
+## Configurable gradle properties
+
+| Property Name                         | Dependency/Plugin     | Default                   |
+|---------------------------------------|-----------------------|---------------------------|
+| `localSpringProfile`                  | Spring                | local                     |
+| `gradleTemplatesSource`               | gradle                |                           |
+| `codeQualityResources`                | plugins               |                           |
+| `integrationTestSpringProfile`        | spring                | integrationTest           |
+| `integrationTestSourceRoot`           | gradle                | src/integration-test      |
+| `performanceTestSourceRoot`           | gradle                | src/perf-test             |
+| `sonarOrganization`                   | sonar                 |                           |
+| `sonarHostUrl`                        | sonar                 | https://sonarcloud.io-1   |
+
+| Property Name                         | Dependency/Plugin     | Default                   |
+|---------------------------------------|-----------------------|---------------------------|
+| `springCloudVersion`                  | Spring                | Greenwich.RELEASE         |
+| `scalaVersion`                        | scala                 | 2.13.1                    |
+| `gatlingVersion`                      | gatling               | 3.3.1                     |
+| `checkStyleVersion`                   | checkstyle            | 8.17                      |
+| `pmdVersion`                          | pmd                   | 6.21.0                    |
+| `jacocoVersion`                       | jacoco                | 0.8.5                     |
+| `spotBugsVersion`                     | spotBugs              | 3.1.11                    |
+| `objenesisVersion`                    | objenesis             | 3.1                       |
+| `hamcrestAllVersion`                  | hamcrest              | 1.3                       |
+| `assertJVersion`                      | assert                | 3.14.0                    |
+| `junitToolBoxVersion`                 | junit                 | 2.4                       |
+| `datadogAgentVersion`                 | datadog               | 0.41.0                    |
+
 
 TBD - move plugin configuration from build script to plugin management and externalize plugin version properties.
 
@@ -41,7 +87,6 @@ TBD - move plugin configuration from build script to plugin management and exter
 | `sonarqubePluginVersion`              | Sonarqube             |
 | `springBootPluginVersion`             | Spring Boot           |
 | `springDependencyMgntPluginVersion`   | Spring Dependencies   |
-
 
 
 ## Spring boot gradle bootstrap
@@ -59,4 +104,3 @@ Provides quick bootstrap scripts for spring-boot which helps building, packaging
 
 ### semantic versioning stretergy
 TBD
-
