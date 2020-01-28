@@ -1,0 +1,40 @@
+apply from: '../../gradle-common/git-common-functions.gradle'
+
+// Trunk Based Development
+task getNextTag {
+    doLast {
+        println getNextTag()
+    }
+}
+
+task prepNextRelease {
+    doLast {
+        updateToNextVersion()
+    }
+}
+
+
+// Branch Based Development
+task getReleaseTag {
+    doLast {
+        println getNextTagByStage('release')
+    }
+}
+
+task getReleaseCandidateTag {
+    doLast {
+        println getNextTagByStage('RC')
+    }
+}
+
+task getBetaTag {
+    doLast {
+        println getNextTagByStage('beta')
+    }
+}
+
+task getAlphaTag {
+    doLast {
+        println getNextTagByStage('alpha')
+    }
+}

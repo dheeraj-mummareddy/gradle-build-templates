@@ -1,0 +1,24 @@
+buildscript { 
+	apply from: "../../gradle-common/init-buildscript.gradle", to: buildscript
+
+} 
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+apply from: '../../spring-boot/spring-rest-jumpstart.gradle'
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}

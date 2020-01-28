@@ -1,0 +1,107 @@
+def sonar_organization = project.properties['sonar_organization'] ?: ""
+def sonar_host_url = project.properties['sonar_host_url'] ?: "https://sonarcloud.io-1"
+def check_style_version = project.properties['checkStyleVersion'] ?: "8.17"
+def pmd_version = project.properties['pmdVersion'] ?: "6.21.0"
+def jacoco_version = project.properties['jacocoVersion'] ?: "0.8.5"
+def spot_bug_version = project.properties['spotBugsVersion'] ?: "3.1.11"
+
+buildscript {
+    def spotbugs_plugin_version = project.properties['spotbugsPluginVersion'] ?: "1.6.9"
+
+    repositories {
+        maven { url 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath "gradle.plugin.com.github.spotbugs:spotbugs-gradle-plugin:${spotbugs_plugin_version}"
+    }
+}
+
+apply plugin: 'checkstyle'
+apply plugin: 'pmd'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.spotbugs'
+
+// SpotBugs Configuration
+spotbugs {
+    ignoreFailures = false
+    toolVersion = "${spot_bug_version}"
+    sourceSets = [ project.sourceSets.main ]
+}
+
+tasks.withType(com.github.spotbugs.SpotBugsTask) {
+    reports {
+        xml.enabled = true
+        html.enabled = false
+        html.stylesheet resources.text.fromFile('../../gradle-common/resources/code-quality/findbugs.xsl')
+    }
+}
+
+// Sonar Cloud Configuration
+sonarqube {
+    properties {
+        property 'sonar.host.url', "${sonar_host_url}"
+        property 'sonar.projectKey', "${organization}_${rootProject.name}"
+        property 'sonar.organization', "${sonar_organization}"
+        property 'sonar.java.spotbugs.reportPaths', 'build/reports/spotbugs/main.xml'
+        property 'sonar.java.pmd.reportPaths', 'build/reports/pmd/main.xml'
+        property 'sonar.java.checkstyle.reportPaths', 'build/reports/checkstyle/main.xml'
+        properties['sonar.tests'] += 'src/integration-test'
+        properties['sonar.junit.reportPaths'] += 'build/test-results/integrationTest'
+    }
+}
+// Run as a totally independent task.
+project.tasks['sonarqube'].dependsOn.clear()
+
+// CheckStyle Configuration
+checkstyle {
+    ignoreFailures = false
+    configFile = file('../../gradle-common/resources/code-quality/checkstyle.xml')
+    toolVersion = "${check_style_version}"
+    sourceSets = [ project.sourceSets.main ]
+}
+
+tasks.withType(Checkstyle) {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+        html.stylesheet resources.text.fromFile('../../gradle-common/resources/code-quality/checkstyle.xsl')
+    }
+}
+
+
+// PMD Configuration
+pmd {
+    ignoreFailures = true
+    toolVersion = "${pmd_version}"
+    sourceSets = [ project.sourceSets.main ]
+}
+
+
+// Jacoco Configuration
+jacoco {
+    toolVersion = "${jacoco_version}"
+    reportsDir = file("$buildDir/reports/jacoco")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
+}
+check.dependsOn jacocoTestReport
+
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.37
+            }
+        }
+    }
+}
+check.dependsOn jacocoTestCoverageVerification
+
+test {
+    finalizedBy jacocoTestReport
+}
