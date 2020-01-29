@@ -1,5 +1,5 @@
 buildscript { 
-	apply from: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/init-buildscript.gradle", to: buildscript
+	apply from: "https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/gradle-common/init-buildscript.gradle", to: buildscript
 }
 
 group = 'com.example'
@@ -9,7 +9,7 @@ repositories {
 	mavenCentral()
 }
 
-apply from: 'https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
+apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
 // local testing
 // apply from: '../../spring-boot/spring-rest-jumpstart.gradle'
 

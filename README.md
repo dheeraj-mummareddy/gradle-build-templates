@@ -8,14 +8,14 @@ Versions can be managed by the services which imports the scripts. Additional co
 Add the following snippet to `build.gradle` to include build script configuration - TBD (move to plugin management)
 ```
 buildscript { 
-	apply from: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/init-buildscript.gradle", to: buildscript
+	apply from: "https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/gradle-common/init-buildscript.gradle", to: buildscript
 }
 ```
 
 ### Spring boot
 Enable spring boot bootstrap configurations by applying configuration
 ```
-apply from: 'https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
+apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
 ```
 
 ## Versioning
