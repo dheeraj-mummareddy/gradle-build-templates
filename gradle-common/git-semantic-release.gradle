@@ -1,4 +1,4 @@
-apply from: '../../gradle-common/git-common-functions.gradle'
+apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/gradle-common/git-common-functions.gradle'
 
 // Trunk Based Development
 task getNextTag {
