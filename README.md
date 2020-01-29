@@ -22,6 +22,10 @@ apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-temp
 
 TDB
 
+## JDK Support
+
+TBD - abstract out the jdk support
+
 ## Supported common plugins
 
 - java
@@ -99,3 +103,6 @@ Provides quick bootstrap scripts for spring-boot which helps building, packaging
 
 ### semantic versioning stretergy
 TBD
+
+### Example Projects
+CI - TBD

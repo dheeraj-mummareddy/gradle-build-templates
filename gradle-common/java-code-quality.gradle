@@ -42,6 +42,9 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 
 // Sonar Cloud Configuration
 sonarqube {
+    print "${sonar_host_url}"
+    print "${sonar_organization}_${rootProject.name}"
+    print "${sonar_organization_key}"
     properties {
         property 'sonar.host.url', "${sonar_host_url}"
         property 'sonar.projectKey', "${sonar_organization}_${rootProject.name}"
