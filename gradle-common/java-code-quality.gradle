@@ -1,5 +1,5 @@
 def sonar_organization_key = project.properties['sonarOrganizationKey'] ?: "marlettefunding-1"
-def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io"
+def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io/"
 def sonar_organization = project.properties['sonarOrganization'] ?: "MarletteFunding"
 def check_style_version = project.properties['checkStyleVersion'] ?: "8.17"
 def pmd_version = project.properties['pmdVersion'] ?: "6.21.0"
@@ -42,9 +42,6 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 
 // Sonar Cloud Configuration
 sonarqube {
-    print "${sonar_host_url}"
-    print "${sonar_organization}_${rootProject.name}"
-    print "${sonar_organization_key}"
     properties {
         property 'sonar.host.url', "${sonar_host_url}"
         property 'sonar.projectKey', "${sonar_organization}_${rootProject.name}"
