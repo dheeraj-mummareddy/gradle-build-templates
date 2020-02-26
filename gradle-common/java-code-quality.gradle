@@ -1,5 +1,5 @@
-def sonar_organization = project.properties['sonar_organization'] ?: ""
-def sonar_host_url = project.properties['sonar_host_url'] ?: "https://sonarcloud.io-1"
+def sonar_organization = project.properties['sonarOrganization'] ?: ""
+def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io"
 def check_style_version = project.properties['checkStyleVersion'] ?: "8.17"
 def pmd_version = project.properties['pmdVersion'] ?: "6.21.0"
 def jacoco_version = project.properties['jacocoVersion'] ?: "0.8.5"
@@ -85,6 +85,9 @@ jacoco {
 }
 
 jacocoTestReport {
+    executionData(file("${project.buildDir}/jacoco/test.exec"),
+            file("${project.buildDir}/jacoco/integrationTest.exec"))
+
     reports {
         xml.enabled = true
         html.enabled = true
