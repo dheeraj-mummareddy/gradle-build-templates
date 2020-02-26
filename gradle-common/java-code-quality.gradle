@@ -96,7 +96,6 @@ jacocoTestReport {
         html.enabled = true
     }
 }
-check.dependsOn jacocoTestReport
 
 jacocoTestCoverageVerification {
     violationRules {
@@ -107,7 +106,6 @@ jacocoTestCoverageVerification {
         }
     }
 }
-check.dependsOn jacocoTestCoverageVerification
 
 task verifyCoverage {
     dependsOn jacocoTestReport
