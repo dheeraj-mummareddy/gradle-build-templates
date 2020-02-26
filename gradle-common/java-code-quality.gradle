@@ -109,6 +109,7 @@ jacocoTestCoverageVerification {
 }
 check.dependsOn jacocoTestCoverageVerification
 
-test {
-    finalizedBy jacocoTestReport
+task verifyCoverage {
+    dependsOn jacocoTestReport
+    dependsOn jacocoTestCoverageVerification
 }
