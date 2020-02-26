@@ -88,6 +88,9 @@ jacoco {
 }
 
 jacocoTestReport {
+    executionData(file("${project.buildDir}/jacoco/test.exec"),
+            file("${project.buildDir}/jacoco/integrationTest.exec"))
+
     reports {
         xml.enabled = true
         html.enabled = true
