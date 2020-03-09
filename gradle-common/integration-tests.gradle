@@ -25,6 +25,7 @@ configurations {
 }
 
 task integrationTest(type: Test) {
+    useJUnitPlatform()
     environment SPRING_PROFILES_ACTIVE: environment.SPRING_PROFILES_ACTIVE ?: "${integrationTest_spring_profile}"
 
     testClassesDirs = sourceSets.integrationTest.output.classesDirs
