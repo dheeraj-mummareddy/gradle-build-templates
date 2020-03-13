@@ -78,6 +78,7 @@ TBD - abstract out the jdk support
 | `hamcrestAllVersion`                  | hamcrest              | 1.3                       |
 | `assertJVersion`                      | assert                | 3.14.0                    |
 | `junitToolBoxVersion`                 | junit                 | 2.4                       |
+| `junitJupiterTestcontainersVersion`   | junit                 | 1.13.0                    |
 | `datadogAgentVersion`                 | datadog               | 0.41.0                    |
 
 
