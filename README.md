@@ -18,6 +18,13 @@ Enable spring boot bootstrap configurations by applying configuration
 apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
 ```
 
+### Spring JAR
+Enable spring jar bootstrap configurations by applying configuration
+```
+apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/spring-library/spring-jar-jumpstart.gradle'
+```
+
+
 ## Versioning
 
 TDB
@@ -67,7 +74,7 @@ TBD - abstract out the jdk support
 
 | Property Name                         | Dependency/Plugin     | Default                   |
 |---------------------------------------|-----------------------|---------------------------|
-| `springCloudVersion`                  | Spring                | Greenwich.RELEASE         |
+| `springCloudVersion`                  | Spring                | Hoxton.SR3	            |
 | `scalaVersion`                        | scala                 | 2.13.1                    |
 | `gatlingVersion`                      | gatling               | 3.3.1                     |
 | `checkStyleVersion`                   | checkstyle            | 8.17                      |
@@ -79,7 +86,7 @@ TBD - abstract out the jdk support
 | `assertJVersion`                      | assert                | 3.14.0                    |
 | `junitToolBoxVersion`                 | junit                 | 2.4                       |
 | `junitJupiterTestcontainersVersion`   | junit                 | 1.13.0                    |
-| `datadogAgentVersion`                 | datadog               | 0.41.0                    |
+| `datadogAgentVersion`                 | datadog               | 0.47.0                    |
 
 
 TBD - move plugin configuration from build script to plugin management and externalize plugin version properties.
@@ -100,7 +107,15 @@ Provides quick bootstrap scripts for spring-boot which helps building, packaging
 
 * Supported plugins
 
-- spring boot
+- Spring boot
+
+## Spring jar gradle bootstrap
+
+Provides quick bootstrap scripts for a spring library which helps building, packaging and containerzing spring library projects.
+
+* Supported plugins
+
+- Java jar
 
 ### semantic versioning stretergy
 TBD

@@ -1,8 +1,9 @@
 def local_spring_profile = project.properties['localSpringProfile'] ?: "local"
 def spring_cloud_version = project.properties['springCloudVersion'] ?: "Hoxton.SR3"
 def gradle_templates_source = project.properties['gradleTemplatesSource'] ?: "https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/gradle-common"
+
 // local testing
-// def gradle_templates_source = "../../gradle-common"
+//def gradle_templates_source = "../../gradle-common"
 
 apply plugin: 'java'
 apply plugin: 'groovy'
@@ -10,7 +11,7 @@ apply plugin: 'scala'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'groovy'
-apply plugin: 'org.springframework.boot'
+apply plugin: 'java-library'
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'io.freefair.lombok'
 apply plugin: 'org.sonarqube'
@@ -18,15 +19,15 @@ apply plugin: 'org.sonarqube'
 apply from: "${gradle_templates_source}/common-utils-tasks.gradle"
 apply from: "${gradle_templates_source}/git-common-functions.gradle"
 apply from: "${gradle_templates_source}/git-semantic-release.gradle"
-apply from: "${gradle_templates_source}/app-monitoring-configuration.gradle"
 apply from: "${gradle_templates_source}/java-code-quality.gradle"
 apply from: "${gradle_templates_source}/integration-tests.gradle"
 apply from: "${gradle_templates_source}/performance-tests.gradle"
+apply from: "${gradle_templates_source}/artifact-publish.gradle"
 
 sourceCompatibility = JavaVersion.VERSION_11
 targetCompatibility = JavaVersion.VERSION_11
 
-bootJar {
+jar {
     manifest {
         attributes 'Implementation-Title': project.name,
                 'Implementation-Version': project.version,
@@ -39,40 +40,5 @@ bootJar {
                 'Git-Branch': getBranch(),
                 'Source-Compatibility': sourceCompatibility,
                 'Target-Compatibility': targetCompatibility
-    }
-}
-
-springBoot {
-    buildInfo {
-        properties {
-            additional = [
-                    'description': project.description,
-                    'Built-By': System.getProperty('user.name'),
-                    'Git-Commit': getRevision(),
-                    'Git-Branch': getBranch(),
-                    'Source-Compatibility': sourceCompatibility,
-                    'Target-Compatibility': targetCompatibility
-            ]
-        }
-    }
-}
-
-bootRun {
-    environment SPRING_PROFILES_ACTIVE: environment.SPRING_PROFILES_ACTIVE ?: "${local_spring_profile}"
-}
-
-task processDocker(type: Copy) {
-    description = 'Copies the Dockerfile and replaces tokens'
-    project.ext.SPRING_PROFILES_ACTIVE = '${SPRING_PROFILES_ACTIVE}'
-    project.ext.GIT_COMMIT = getRevision()
-    from('src/main/docker/')
-    into('build/libs/')
-    expand(project.properties)
-}
-build.dependsOn processDocker
-
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${spring_cloud_version}"
     }
 }

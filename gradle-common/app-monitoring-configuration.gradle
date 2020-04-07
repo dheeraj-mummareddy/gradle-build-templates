@@ -1,4 +1,4 @@
-def datadog_agent_version = project.properties['datadogAgentVersion'] ?: "0.41.0"
+def datadog_agent_version = project.properties['datadogAgentVersion'] ?: "0.47.0"
 
 configurations {
     datadog

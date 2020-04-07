@@ -13,10 +13,10 @@ repositories {
 
 //apply from: 'https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
 // local testing
-apply from: '../../spring-boot/spring-rest-jumpstart.gradle'
+apply from: '../../spring-library/spring-jar-jumpstart.gradle'
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
