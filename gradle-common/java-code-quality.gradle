@@ -78,6 +78,8 @@ pmd {
     ignoreFailures = true
     toolVersion = "${pmd_version}"
     sourceSets = [ project.sourceSets.main ]
+    ruleSets = [] // turn off default rules - defaults to only "category/java/errorprone.xml"
+    ruleSetFiles = resources.text.fromUri("${code_quality_resources}/pmd-rulesets.xml")
 }
 
 
