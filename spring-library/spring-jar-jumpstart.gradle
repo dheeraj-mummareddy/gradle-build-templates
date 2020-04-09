@@ -48,3 +48,9 @@ jar {
                 'Target-Compatibility': targetCompatibility
     }
 }
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${spring_cloud_version}"
+    }
+}
