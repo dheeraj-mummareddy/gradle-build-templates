@@ -75,11 +75,15 @@ tasks.withType(Checkstyle) {
 
 // PMD Configuration
 pmd {
+    def fileURL = new URL("${code_quality_resources}/pmd-rulesets.xml")
+    def remoteFile = new File(fileURL.toURI())
+
     ignoreFailures = true
     toolVersion = "${pmd_version}"
     sourceSets = [ project.sourceSets.main ]
     ruleSets = [] // turn off default rules - defaults to only "category/java/errorprone.xml"
-    ruleSetFiles = files("${code_quality_resources}/pmd-rulesets.xml")
+    project.resources.file.fromUri()
+    ruleSetFiles = files(remoteFile)
 }
 
 
