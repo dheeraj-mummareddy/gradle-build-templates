@@ -82,7 +82,6 @@ pmd {
     toolVersion = "${pmd_version}"
     sourceSets = [ project.sourceSets.main ]
     ruleSets = [] // turn off default rules - defaults to only "category/java/errorprone.xml"
-    project.resources.file.fromUri()
     ruleSetFiles = files(remoteFile)
 }
 
