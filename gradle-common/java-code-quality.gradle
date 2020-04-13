@@ -1,11 +1,11 @@
-def sonar_organization_key = project.properties['sonarOrganizationKey'] ?: "marlettefunding-1"
+def sonar_organization_key = project.properties['sonarOrganizationKey'] ?: ""
 def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io/"
-def sonar_organization = project.properties['sonarOrganization'] ?: "MarletteFunding"
+def sonar_organization = project.properties['sonarOrganization'] ?: ""
 def check_style_version = project.properties['checkStyleVersion'] ?: "8.17"
 def pmd_version = project.properties['pmdVersion'] ?: "6.21.0"
 def jacoco_version = project.properties['jacocoVersion'] ?: "0.8.5"
 def spot_bug_version = project.properties['spotBugsVersion'] ?: "3.1.11"
-def code_quality_resources = project.properties['codeQualityResources'] ?: "https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/gradle-common/resources/code-quality"
+def code_quality_resources = project.properties['codeQualityResources'] ?: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/resources/code-quality"
 //local testing
 //def code_quality_resources = project.properties['codeQualityResources'] ?: "../../gradle-common/resources/code-quality"
 

@@ -1,6 +1,6 @@
 def local_spring_profile = project.properties['localSpringProfile'] ?: "local"
 def spring_cloud_version = project.properties['springCloudVersion'] ?: "Hoxton.SR3"
-def gradle_templates_source = project.properties['gradleTemplatesSource'] ?: "https://raw.githubusercontent.com/MarletteFunding/gradle-build-templates/master/gradle-common"
+def gradle_templates_source = project.properties['gradleTemplatesSource'] ?: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common"
 
 // local testing
 //def gradle_templates_source = "../../gradle-common"
