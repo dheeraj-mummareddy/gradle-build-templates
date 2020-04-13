@@ -1,10 +1,13 @@
+def sonar_organization_key = project.properties['sonarOrganizationKey'] ?: ""
+def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io/"
 def sonar_organization = project.properties['sonarOrganization'] ?: ""
-def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io"
 def check_style_version = project.properties['checkStyleVersion'] ?: "8.17"
 def pmd_version = project.properties['pmdVersion'] ?: "6.21.0"
 def jacoco_version = project.properties['jacocoVersion'] ?: "0.8.5"
 def spot_bug_version = project.properties['spotBugsVersion'] ?: "3.1.11"
 def code_quality_resources = project.properties['codeQualityResources'] ?: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/resources/code-quality"
+//local testing
+//def code_quality_resources = project.properties['codeQualityResources'] ?: "../../gradle-common/resources/code-quality"
 
 buildscript {
     def spotbugs_plugin_version = project.properties['spotbugsPluginVersion'] ?: "1.6.9"
@@ -41,8 +44,8 @@ tasks.withType(com.github.spotbugs.SpotBugsTask) {
 sonarqube {
     properties {
         property 'sonar.host.url', "${sonar_host_url}"
-        property 'sonar.projectKey', "${organization}_${rootProject.name}"
-        property 'sonar.organization', "${sonar_organization}"
+        property 'sonar.projectKey', "${sonar_organization}_${rootProject.name}"
+        property 'sonar.organization', "${sonar_organization_key}"
         property 'sonar.java.spotbugs.reportPaths', 'build/reports/spotbugs/main.xml'
         property 'sonar.java.pmd.reportPaths', 'build/reports/pmd/main.xml'
         property 'sonar.java.checkstyle.reportPaths', 'build/reports/checkstyle/main.xml'
@@ -93,7 +96,6 @@ jacocoTestReport {
         html.enabled = true
     }
 }
-check.dependsOn jacocoTestReport
 
 jacocoTestCoverageVerification {
     violationRules {
@@ -104,8 +106,8 @@ jacocoTestCoverageVerification {
         }
     }
 }
-check.dependsOn jacocoTestCoverageVerification
 
-test {
-    finalizedBy jacocoTestReport
+task verifyCoverage {
+    dependsOn jacocoTestReport
+    dependsOn jacocoTestCoverageVerification
 }

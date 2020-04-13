@@ -1,0 +1,27 @@
+buildscript { 
+	//apply from: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common/init-buildscript.gradle", to: buildscript
+	// local testing
+	apply from: '../../gradle-common/init-buildscript.gradle', to: buildscript
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+repositories {
+	mavenCentral()
+}
+
+//apply from: 'https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/spring-boot/spring-rest-jumpstart.gradle'
+// local testing
+apply from: '../../spring-library/spring-jar-jumpstart.gradle'
+
+dependencies {
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+	}
+}
+
+test {
+	useJUnitPlatform()
+}
