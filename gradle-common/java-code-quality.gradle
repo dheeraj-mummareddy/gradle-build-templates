@@ -23,22 +23,6 @@ buildscript {
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'jacoco'
-apply plugin: 'com.github.spotbugs'
-
-// SpotBugs Configuration
-spotbugs {
-    ignoreFailures = false
-    toolVersion = "${spot_bug_version}"
-    sourceSets = [ project.sourceSets.main ]
-}
-
-tasks.withType(com.github.spotbugs.SpotBugsTask) {
-    reports {
-        xml.enabled = true
-        html.enabled = false
-        html.stylesheet resources.text.fromUri("${code_quality_resources}/findbugs.xsl")
-    }
-}
 
 // Sonar Cloud Configuration
 sonarqube {

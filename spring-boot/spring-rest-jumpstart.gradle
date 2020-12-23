@@ -1,6 +1,11 @@
 def local_spring_profile = project.properties['localSpringProfile'] ?: "local"
-def spring_cloud_version = project.properties['springCloudVersion'] ?: "Hoxton.SR3"
+def spring_cloud_version = project.properties['springCloudVersion'] ?: "Hoxton.SR9"
 def gradle_templates_source = project.properties['gradleTemplatesSource'] ?: "https://raw.githubusercontent.com/dheeraj-mummareddy/gradle-build-templates/master/gradle-common"
+def test_containers_enabled = project.properties['testContainersEnabled'] ?: "false"
+def test_containers_reusable = project.properties['testContainersReusable'] ?: "false"
+def configured_containers = project.properties['configuredContainers'] ?: ""
+def testContiner_application_initializer_class = project.properties['testContinerApplicationInitializerClass'] ?: ""
+
 // local testing
 // def gradle_templates_source = "../../gradle-common"
 
@@ -59,12 +64,17 @@ springBoot {
 
 bootRun {
     environment SPRING_PROFILES_ACTIVE: environment.SPRING_PROFILES_ACTIVE ?: "${local_spring_profile}"
+    args "application.testcontainers.enable=${test_containers_enabled}"
+    args "application.testcontainers.reusable=${test_containers_reusable}"
+    args "application.testcontainers.containers=${configured_containers}"
+    args "application.testcontainers.initializer=${testContiner_application_initializer_class}"
 }
 
 task processDocker(type: Copy) {
     description = 'Copies the Dockerfile and replaces tokens'
     project.ext.SPRING_PROFILES_ACTIVE = '${SPRING_PROFILES_ACTIVE}'
     project.ext.GIT_COMMIT = getRevision()
+    fileMode = 0755
     from('src/main/docker/')
     into('build/libs/')
     expand(project.properties)
