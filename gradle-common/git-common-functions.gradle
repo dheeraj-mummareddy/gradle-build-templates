@@ -62,40 +62,6 @@ def updateToNextVersion() {
     }
 }
 
-// Used for Branch based development
-def getNextTagByStage(stage = null) {
-    if (stage == 'release') {
-        return getBaseVersion()
-    }
-
-    String customTag
-    if (stage == 'RC') {
-        customTag = '-RC'
-
-    } else if (stage == 'beta') {
-        customTag = '-BETA'
-
-    } else {
-        customTag = '-ALPHA'
-    }
-
-    def tags = runCommands("git", "tag", "-l", "--sort=-version:refname", getBaseVersion() + "*").trim()
-    String[] tagList = tags.split("\n").collect()
-    String[] filteredTagList = tagList.findAll { it.contains(customTag) && it.contains(getBaseVersion().toString()) }
-    String latestTag = filteredTagList.length == 0 ? '' : filteredTagList.first()
-    String[] tagPart = latestTag.split(customTag).collect()
-
-    Integer nextVersion
-    if (latestTag.indexOf(customTag) == -1) {
-        nextVersion = 1
-    } else {
-        Integer currentVersion = Integer.valueOf(tagPart.last().toString())
-        nextVersion = currentVersion + 1
-    }
-
-    return sprintf('%1$s%2$s%3$s', [getBaseVersion(), customTag, nextVersion])
-}
-
 private String runCommands(String... commands) {
     def process = new ProcessBuilder(commands).redirectErrorStream(true).start()
     process.waitFor()

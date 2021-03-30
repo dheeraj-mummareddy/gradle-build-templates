@@ -1,6 +1,3 @@
-def sonar_organization_key = project.properties['sonarOrganizationKey'] ?: ""
-def sonar_host_url = project.properties['sonarHostUrl'] ?: "https://sonarcloud.io/"
-def sonar_organization = project.properties['sonarOrganization'] ?: ""
 def check_style_version = project.properties['checkStyleVersion'] ?: "8.17"
 def pmd_version = project.properties['pmdVersion'] ?: "6.21.0"
 def jacoco_version = project.properties['jacocoVersion'] ?: "0.8.6"
@@ -22,22 +19,6 @@ buildscript {
 apply plugin: 'checkstyle'
 apply plugin: 'pmd'
 apply plugin: 'jacoco'
-
-// Sonar Cloud Configuration
-sonarqube {
-    properties {
-        property 'sonar.host.url', "${sonar_host_url}"
-        property 'sonar.projectKey', "${sonar_organization}_${rootProject.name}"
-        property 'sonar.organization', "${sonar_organization_key}"
-        property 'sonar.java.spotbugs.reportPaths', 'build/reports/spotbugs/main.xml'
-        property 'sonar.java.pmd.reportPaths', 'build/reports/pmd/main.xml'
-        property 'sonar.java.checkstyle.reportPaths', 'build/reports/checkstyle/main.xml'
-        properties['sonar.tests'] += 'src/integration-test'
-        properties['sonar.junit.reportPaths'] += 'build/test-results/integrationTest'
-    }
-}
-// Run as a totally independent task.
-project.tasks['sonarqube'].dependsOn.clear()
 
 // CheckStyle Configuration
 checkstyle {
